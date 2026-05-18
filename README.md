@@ -1,3 +1,11 @@
+# instalacion del proyecto 
+```bash
+npm install
+```
+# ejecucion
+```bash
+npm run serve
+```
 # Documentación Rápida — Plataforma de Gestión Académica Universitaria
 
 ## Descripción General
