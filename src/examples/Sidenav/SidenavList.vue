@@ -224,7 +224,7 @@ const menuItems = computed(() => {
         items: [
           {
             name: "Mi historial",
-            route: "/estudiante/programacion"
+            route: "/estudiante/historial"
           }
         ]
       }
