@@ -6,7 +6,7 @@ import {
   getReporteMateria
 } from "@/services/reportes.service";
 
-const materiaId = ref("");
+const search = ref("");
 
 const reportes = ref([]);
 
@@ -22,7 +22,7 @@ const searchReporte = async () => {
 
     const response =
       await getReporteMateria(
-        materiaId.value
+        search.value
       );
 
     reportes.value =
@@ -122,10 +122,10 @@ const getBadge = (nota) => {
         <div class="col-md-4">
 
           <input
-            v-model="materiaId"
-            type="number"
+            v-model="search"
+            type="text"
             class="form-control"
-            placeholder="ID Materia"
+            placeholder="Buscar materia por nombre o ID"
           />
 
         </div>

@@ -9,10 +9,10 @@ export const getHistorialEstudiante = async (search) => {
 
 };
 
-export const getReporteMateria = async (id) => {
+export const getReporteMateria = async (search) => {
 
   const response = await api.get(
-    `/reportes/materia/${id}`
+    `/reportes/materia?search=${search}`
   );
 
   return response.data;
