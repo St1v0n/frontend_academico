@@ -19,6 +19,7 @@ import UsuariosEdit from "@/views/admin/usuarios/Edit.vue";
 
 //estudiantes
 import EstudiantesIndex from "@/views/estudiante/programacion/Index.vue";
+import EstudiantesHistorialIndex from "@/views/estudiante/historial/Index.vue";
 
 //carreras
 import CarrerasIndex from "@/views/admin/carreras/Index.vue";
@@ -247,6 +248,14 @@ const routes = [
   {
     path: "/estudiante/programacion",
     component: EstudiantesIndex,
+    meta: {
+      requiresAuth: true,
+      role: "ESTUDIANTE"
+    }
+  },
+  {
+    path: "/estudiante/historial",
+    component: EstudiantesHistorialIndex,
     meta: {
       requiresAuth: true,
       role: "ESTUDIANTE"

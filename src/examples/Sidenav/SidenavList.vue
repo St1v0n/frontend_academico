@@ -212,7 +212,7 @@ const menuItems = computed(() => {
         items: [
           {
             name: "Programar materias",
-            route: "/estudiante/inscripciones/create"
+            route: "/estudiante/programacion"
           }
         ]
       },
