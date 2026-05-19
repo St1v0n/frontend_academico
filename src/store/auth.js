@@ -32,66 +32,41 @@ export const useAuthStore = defineStore("auth", {
 
       try {
 
-        const response = await api.post(
-          "/auth/login",
-          {
-            correo,
-            password,
-          }
-        );
+        const response = await api.post("/auth/login", {
+          correo,
+          password,
+        });
 
-        const { token, user } =
-          response.data;
+        const { token, user } = response.data;
 
         this.token = token;
         this.user = user;
 
-        localStorage.setItem(
-          "token",
-          token
-        );
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify(user)
-        );
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
         // REDIRECCIÓN SEGÚN ROL
-        if (
-          user.rol === "SECRETARIA"
-        ) {
+        if (user.rol === "SECRETARIA") {
 
-          router.push(
-            "/dashboard"
-          );
+          router.push("/admin/dashboard");
 
         }
 
-        else if (
-          user.rol === "DOCENTE"
-        ) {
+        else if (user.rol === "DOCENTE") {
 
-          router.push(
-            "/docente/dashboard"
-          );
+          router.push("/docente/dashboard");
 
         }
 
-        else if (
-          user.rol === "ESTUDIANTE"
-        ) {
+        else if (user.rol === "ESTUDIANTE") {
 
-          router.push(
-            "/estudiante/dashboard"
-          );
+          router.push("/estudiante/programacion");
 
         }
 
         else {
 
-          router.push(
-            "/dashboard"
-          );
+          router.push("/signin");
 
         }
 
@@ -118,6 +93,7 @@ export const useAuthStore = defineStore("auth", {
       localStorage.removeItem("user");
 
       router.push("/signin");
+
     }
 
   }

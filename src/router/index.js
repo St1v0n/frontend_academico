@@ -250,7 +250,7 @@ const routes = [
     component: EstudiantesIndex,
     meta: {
       requiresAuth: true,
-      role: "ESTUDIANTE"
+      roles: ["ESTUDIANTE"]
     }
   },
   {
@@ -258,7 +258,7 @@ const routes = [
     component: EstudiantesHistorialIndex,
     meta: {
       requiresAuth: true,
-      role: "ESTUDIANTE"
+      roles: ["ESTUDIANTE"]
     }
   },
 
