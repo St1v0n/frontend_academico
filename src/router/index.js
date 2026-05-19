@@ -17,6 +17,9 @@ import DocenteDashboard from "@/views/docente/Dashboard.vue";
 import UsuariosCreate from "@/views/admin/usuarios/Create.vue";
 import UsuariosEdit from "@/views/admin/usuarios/Edit.vue";
 
+//estudiantes
+import EstudiantesIndex from "@/views/estudiante/programacion/Index.vue";
+
 //carreras
 import CarrerasIndex from "@/views/admin/carreras/Index.vue";
 import CarrerasCreate from "@/views/admin/carreras/Create.vue";
@@ -237,6 +240,16 @@ const routes = [
     meta: {
       requiresAuth: true,
       roles: ["DOCENTE"]
+    }
+  },
+
+  // ESTUDIANTES
+  {
+    path: "/estudiante/programacion",
+    component: EstudiantesIndex,
+    meta: {
+      requiresAuth: true,
+      role: "ESTUDIANTE"
     }
   },
 

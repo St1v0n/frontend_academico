@@ -9,19 +9,25 @@ const router = useRouter();
 const openMenu = ref(null);
 
 const toggleMenu = (menu) => {
+
   openMenu.value =
     openMenu.value === menu
       ? null
       : menu;
+
 };
 
 const closeAll = () => {
+
   openMenu.value = null;
+
 };
 
 // LOGOUT
 const logoutUser = () => {
+
   auth.logout(router);
+
 };
 
 // MENUS POR ROL
@@ -29,7 +35,9 @@ const menuItems = computed(() => {
 
   const rol = auth.user?.rol;
 
-  // ADMIN
+  // =========================
+  // SECRETARIA
+  // =========================
   if (rol === "SECRETARIA") {
 
     return [
@@ -97,17 +105,7 @@ const menuItems = computed(() => {
           }
         ]
       },
-      {
-        title: "Historial",
-        key: "historial",
-        icon: "ni ni-archive-2",
-        items: [
-          {
-            name: "Académico",
-            route: "/admin/historial"
-          }
-        ]
-      },
+
       {
         title: "Periodos",
         key: "periodos",
@@ -119,6 +117,7 @@ const menuItems = computed(() => {
           }
         ]
       },
+
       {
         title: "Prerrequisitos",
         key: "prerrequisitos",
@@ -132,26 +131,11 @@ const menuItems = computed(() => {
       },
 
       {
-        title: "Notas",
-        key: "notas",
-        icon: "ni ni-paper-diploma",
-        items: [
-          {
-            name: "Registrar notas",
-            route: "/docente/notas"
-          }
-        ]
-      },
-
-      {
         title: "Reportes",
         key: "reportes",
         icon: "ni ni-chart-bar-32",
         items: [
-          /* {
-            name: "Académicos",
-            route: "/admin/reportes"
-          }, */
+
           {
             name: "Historial",
             route: "/admin/reportes/historial"
@@ -171,17 +155,18 @@ const menuItems = computed(() => {
             name: "Por periodo",
             route: "/admin/reportes/periodo"
           }
-          
+
         ]
       }
-
 
     ];
 
   }
 
+  // =========================
   // DOCENTE
-  if (rol === "Docente") {
+  // =========================
+  if (rol === "DOCENTE") {
 
     return [
 
@@ -191,8 +176,55 @@ const menuItems = computed(() => {
         icon: "ni ni-paper-diploma",
         items: [
           {
-            name: "Mis notas",
+            name: "Registrar notas",
             route: "/docente/notas"
+          }
+        ]
+      },
+
+      {
+        title: "Materias",
+        key: "materias-docente",
+        icon: "ni ni-books",
+        items: [
+          {
+            name: "Mis materias",
+            route: "/docente/materias"
+          }
+        ]
+      }
+
+    ];
+
+  }
+
+  // =========================
+  // ESTUDIANTE
+  // =========================
+  if (rol === "ESTUDIANTE") {
+
+    return [
+
+      {
+        title: "Inscripciones",
+        key: "inscripciones-estudiante",
+        icon: "ni ni-badge",
+        items: [
+          {
+            name: "Programar materias",
+            route: "/estudiante/inscripciones/create"
+          }
+        ]
+      },
+
+      {
+        title: "Historial",
+        key: "historial-estudiante",
+        icon: "ni ni-archive-2",
+        items: [
+          {
+            name: "Mi historial",
+            route: "/estudiante/historial"
           }
         ]
       }
@@ -215,6 +247,7 @@ const menuItems = computed(() => {
     to="/dashboard"
     class="nav-link text-dark"
   >
+
     <div
       class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
     >
@@ -224,6 +257,7 @@ const menuItems = computed(() => {
     <span class="nav-link-text ms-1">
       Dashboard
     </span>
+
   </router-link>
 
   <!-- MENUS -->
