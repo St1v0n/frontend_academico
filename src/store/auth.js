@@ -32,28 +32,67 @@ export const useAuthStore = defineStore("auth", {
 
       try {
 
-        const response = await api.post("/auth/login", {
-          correo,
-          password,
-        });
+        const response = await api.post(
+          "/auth/login",
+          {
+            correo,
+            password,
+          }
+        );
 
-        const { token, user } = response.data;
+        const { token, user } =
+          response.data;
 
         this.token = token;
         this.user = user;
 
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem(
+          "token",
+          token
+        );
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify(user)
+        );
 
         // REDIRECCIÓN SEGÚN ROL
-        if (user.rol === "Administrador") {
-          router.push("/admin/dashboard");
+        if (
+          user.rol === "SECRETARIA"
+        ) {
+
+          router.push(
+            "/dashboard"
+          );
+
         }
-        else if (user.rol === "Docente") {
-          router.push("/docente/dashboard");
+
+        else if (
+          user.rol === "DOCENTE"
+        ) {
+
+          router.push(
+            "/docente/dashboard"
+          );
+
         }
+
+        else if (
+          user.rol === "ESTUDIANTE"
+        ) {
+
+          router.push(
+            "/estudiante/dashboard"
+          );
+
+        }
+
         else {
-          router.push("/dashboard");
+
+          router.push(
+            "/dashboard"
+          );
+
         }
 
         return true;
@@ -65,7 +104,9 @@ export const useAuthStore = defineStore("auth", {
           "Error al iniciar sesión";
 
         return false;
+
       }
+
     },
 
     logout(router) {
