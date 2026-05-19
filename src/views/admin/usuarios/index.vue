@@ -80,13 +80,24 @@ const resetearPassword = async (id) => {
 
   try {
 
-    await resetPassword(id);
+    const response =
+      await resetPassword(id);
 
-    alert("Contraseña restablecida");
+    const data = response.data;
+
+    alert(
+      `Contraseña restablecida correctamente\n\n` +
+      `Usuario: ${data.nombres} ${data.apellidos}\n` +
+      `Contraseña temporal: ${data.tempPassword}`
+    );
 
   } catch (error) {
 
     console.error(error);
+
+    alert(
+      "Error al resetear contraseña"
+    );
 
   }
 
