@@ -148,10 +148,10 @@ const menuItems = computed(() => {
         key: "reportes",
         icon: "ni ni-chart-bar-32",
         items: [
-          {
+          /* {
             name: "Académicos",
             route: "/admin/reportes"
-          },
+          }, */
           {
             name: "Historial",
             route: "/admin/reportes/historial"
