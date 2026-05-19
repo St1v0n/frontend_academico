@@ -4,7 +4,7 @@ import { ref, onMounted, computed } from "vue";
 import { useAuthStore } from "@/store/auth";
 
 import {
-  getMiHistorial
+  getHistorial
 } from "@/services/inscripciones.service";
 
 const auth = useAuthStore();
@@ -21,11 +21,11 @@ const loadHistorial = async () => {
     loading.value = true;
 
     const response =
-      await getMiHistorial(
+      await getHistorial(
         auth.user.id
       );
 
-    historial.value = response;
+    historial.value = response || [];
 
   } catch (error) {
 
@@ -135,7 +135,6 @@ onMounted(() => {
   <!-- RESUMEN -->
   <div class="row mb-4">
 
-    <!-- APROBADAS -->
     <div class="col-md-3 mb-3">
 
       <div class="card">
@@ -156,7 +155,6 @@ onMounted(() => {
 
     </div>
 
-    <!-- REPROBADAS -->
     <div class="col-md-3 mb-3">
 
       <div class="card">
@@ -177,7 +175,6 @@ onMounted(() => {
 
     </div>
 
-    <!-- PENDIENTES -->
     <div class="col-md-3 mb-3">
 
       <div class="card">
@@ -198,7 +195,6 @@ onMounted(() => {
 
     </div>
 
-    <!-- PROMEDIO -->
     <div class="col-md-3 mb-3">
 
       <div class="card">
@@ -264,33 +260,13 @@ onMounted(() => {
 
                 <tr>
 
-                  <th>
-                    Materia
-                  </th>
-
-                  <th>
-                    Sigla
-                  </th>
-
-                  <th>
-                    Semestre
-                  </th>
-
-                  <th>
-                    Gestión
-                  </th>
-
-                  <th>
-                    Periodo
-                  </th>
-
-                  <th>
-                    Nota
-                  </th>
-
-                  <th>
-                    Estado
-                  </th>
+                  <th>Materia</th>
+                  <th>Sigla</th>
+                  <th>Semestre</th>
+                  <th>Gestión</th>
+                  <th>Periodo</th>
+                  <th>Nota</th>
+                  <th>Estado</th>
 
                 </tr>
 
@@ -344,7 +320,6 @@ onMounted(() => {
 
                   <td>
 
-                    <!-- APROBADO -->
                     <span
                       v-if="
                         item.estado_academico ===
@@ -355,7 +330,6 @@ onMounted(() => {
                       APROBADO
                     </span>
 
-                    <!-- REPROBADO -->
                     <span
                       v-else-if="
                         item.estado_academico ===
@@ -366,7 +340,6 @@ onMounted(() => {
                       REPROBADO
                     </span>
 
-                    <!-- PENDIENTE -->
                     <span
                       v-else
                       class="badge bg-warning"

@@ -44,6 +44,6 @@ export async function getHistorial(
       `/inscripciones/historial/${estudianteId}`
     );
 
-  return response.data;
+  return response.data.data;
 
 }
