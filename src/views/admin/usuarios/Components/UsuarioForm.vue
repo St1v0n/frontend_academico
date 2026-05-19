@@ -132,11 +132,11 @@ const submit = () => {
         </option>
 
         <option value="2">
-          DOCENTE
+          ESTUDIANTE 
         </option>
 
         <option value="3">
-          ESTUDIANTE
+          DOCENTE
         </option>
 
       </select>
