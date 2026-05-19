@@ -19,8 +19,7 @@ const loadPeriodos = async () => {
   const response =
     await getPeriodos();
 
-  periodos.value =
-    response.data;
+    periodos.value = response;
 
 };
 
