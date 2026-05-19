@@ -4,7 +4,7 @@ import { useStore } from "vuex";
 
 import SidenavList from "./SidenavList.vue";
 
-import logo from "@/assets/img/LOGO.png";
+/* import logo from "@/assets/img/LOGO.png"; */
 
 const store = useStore();
 
@@ -37,11 +37,11 @@ const darkMode = computed(() => store.state.darkMode);
       to="/admin/dashboard"
     >
 
-      <img
+      <!-- <img
         :src="logo"
         class="navbar-brand-img h-100"
         alt="main_logo"
-      />
+      /> -->
 
       <span
         class="ms-2 font-weight-bold"
