@@ -1,8 +1,8 @@
 import api from "@/boot/axios";
-export const getHistorialEstudiante = async (id) => {
+export const getHistorialEstudiante = async (search) => {
 
   const response = await api.get(
-    `/reportes/historial/${id}`
+    `/reportes/historial?search=${search}`
   );
 
   return response.data;

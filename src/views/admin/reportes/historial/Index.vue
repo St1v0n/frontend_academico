@@ -6,7 +6,7 @@ import {
   getHistorialEstudiante
 } from "@/services/reportes.service";
 
-const estudianteId = ref("");
+const search = ref("");
 
 const historial = ref([]);
 
@@ -20,7 +20,7 @@ const searchHistorial = async () => {
 
     const response =
       await getHistorialEstudiante(
-        estudianteId.value
+        search.value
       );
 
     historial.value =
@@ -77,10 +77,10 @@ const getBadge = (resultado) => {
         <div class="col-md-4">
 
           <input
-            v-model="estudianteId"
-            type="number"
+            v-model="search"
+            type="text"
             class="form-control"
-            placeholder="ID Estudiante"
+            placeholder="Buscar estudiante por nombre o ID"
           />
 
         </div>
