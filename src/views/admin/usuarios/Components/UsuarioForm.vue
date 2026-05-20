@@ -1,5 +1,15 @@
 <script setup>
-import { reactive, watch } from "vue";
+import {
+  reactive,
+  watch,
+  ref,
+  computed,
+  onMounted
+} from "vue";
+
+import {
+  getCarreras
+} from "@/services/carreras.service";
 
 const props = defineProps({
   modelValue: Object,
@@ -10,13 +20,42 @@ const emit = defineEmits([
   "submit"
 ]);
 
+const carreras = ref([]);
+
+// FORM
 const form = reactive({
 
   nombres: "",
   apellidos: "",
   ci: "",
   correo: "",
-  rol_id: ""
+  rol_id: "",
+  carrera_id: ""
+
+});
+
+// CARGAR CARRERAS
+const loadCarreras = async () => {
+
+  try {
+
+    const response =
+      await getCarreras();
+
+    carreras.value = response;
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
+// VALIDAR SI ES ESTUDIANTE
+const isEstudiante = computed(() => {
+
+  return Number(form.rol_id) === 2;
 
 });
 
@@ -33,11 +72,36 @@ watch(() => props.modelValue, (value) => {
   immediate: true
 });
 
+// LIMPIAR CARRERA SI NO ES ESTUDIANTE
+watch(() => form.rol_id, (value) => {
+
+  if (Number(value) !== 2) {
+
+    form.carrera_id = "";
+
+  }
+
+});
+
+// SUBMIT
 const submit = () => {
 
-  emit("submit", { ...form });
+  emit("submit", {
+    ...form,
+    rol_id: Number(form.rol_id),
+    carrera_id:
+      form.carrera_id
+        ? Number(form.carrera_id)
+        : null
+  });
 
 };
+
+onMounted(() => {
+
+  loadCarreras();
+
+});
 </script>
 
 <template>
@@ -111,7 +175,7 @@ const submit = () => {
     </div>
 
     <!-- ROL -->
-    <div class="col-12 mb-3">
+    <div class="col-md-6 mb-3">
 
       <label class="form-label">
         Rol
@@ -132,11 +196,43 @@ const submit = () => {
         </option>
 
         <option value="2">
-          ESTUDIANTE 
+          ESTUDIANTE
         </option>
 
         <option value="3">
           DOCENTE
+        </option>
+
+      </select>
+
+    </div>
+
+    <!-- CARRERA -->
+    <div
+      v-if="isEstudiante"
+      class="col-md-6 mb-3"
+    >
+
+      <label class="form-label">
+        Carrera
+      </label>
+
+      <select
+        v-model="form.carrera_id"
+        class="form-select"
+        required
+      >
+
+        <option value="">
+          Seleccionar carrera
+        </option>
+
+        <option
+          v-for="c in carreras"
+          :key="c.id_carrera"
+          :value="c.id_carrera"
+        >
+          {{ c.nombre }}
         </option>
 
       </select>
