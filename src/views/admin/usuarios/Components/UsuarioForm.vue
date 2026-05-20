@@ -218,7 +218,7 @@ onMounted(() => {
       </label>
 
       <select
-        v-model="form.carrera_id"
+        v-model.number="form.carrera_id"
         class="form-select"
         required
       >
