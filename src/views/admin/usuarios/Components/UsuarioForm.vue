@@ -42,7 +42,11 @@ const loadCarreras = async () => {
     const response =
       await getCarreras();
 
-    carreras.value = response;
+    carreras.value =
+      response.filter(
+        carrera =>
+          carrera.estado === true
+      );
 
   } catch (error) {
 
